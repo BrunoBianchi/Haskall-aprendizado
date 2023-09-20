@@ -24,3 +24,29 @@ delta a b c
     delta = b*b - 4*a*c
     raiz1 = (-b+sqrt(delta))/(2*a)
     raiz2 = (-b-sqrt(delta))/(2*a)
+
+
+somaPares::[Int]->Int
+somaPares[] = 0
+somaPares(h:t)
+  | (mod h 2) == 0 = h + somaPares t
+  | otherwise = somaPares t
+
+ocorrencias::String->Char->Int
+ocorrencias[] ch = 0
+ocorrencias(h:t) ch
+  |h == ch =  (ocorrencias t ch) + 1
+  |otherwise = ocorrencias t ch
+
+removeDupli:: [Int] -> [Int]
+removeDupli [] = []
+removeDupli [h] = [h]
+removeDupli(h:(ht:tt))
+  | h == ht = removeDupli (h:tt)
+  | otherwise =  h: removeDupli (ht:tt)
+
+divisores::Int->[Int]
+divisores n = [ x| x<-[1..n],mod n x == 0]
+
+primo::Int->Bool
+primo n = if length(divisores n) == 2 then True else False
